@@ -1,0 +1,15 @@
+# Environment Secrets
+.env
+*.env
+
+# Cache & Environments
+__pycache__/
+.ipynb_checkpoints/
+.virtual_documents/
+.vscode/
+.claude/
+.venv/
+.conda/
+
+# Large archives
+*.zip
