@@ -13,3 +13,9 @@ __pycache__/
 
 # Large archives
 *.zip
+
+# Nested standalone repos (each has its own .git)
+/rent/
+/seoul_rent/
+/seoul_rent_api/
+/prime-number_repo/
