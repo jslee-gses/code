@@ -19,3 +19,13 @@ __pycache__/
 /seoul_rent/
 /seoul_rent_api/
 /prime-number_repo/
+
+# Separate scratch project, not part of the lecture series
+/geocoding_kakao/
+
+# Dropbox sync conflict copies
+*충돌된 사본*
+
+# Stray duplicate saves
+/Problem_set_01_answer.ipynb
+lecture03_data_visualization/03_2_plotly (1).ipynb
