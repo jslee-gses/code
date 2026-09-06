@@ -29,3 +29,6 @@ __pycache__/
 # Stray duplicate saves
 /Problem_set_01_answer.ipynb
 lecture03_data_visualization/03_2_plotly (1).ipynb
+
+# Oversized raw data (exceeds GitHub's 100MB per-file limit)
+/lecture06_Living_Population/data/SPOP_2025_ADM.csv
