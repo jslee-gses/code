@@ -1,0 +1,1 @@
+lecture05_Urban_Planning_Index/shp/bnd_all_00_2025_2Q/bnd_dong_00_2025_2Q.shp filter=lfs diff=lfs merge=lfs -text
