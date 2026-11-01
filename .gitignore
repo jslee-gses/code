@@ -32,3 +32,7 @@ lecture03_data_visualization/03_2_plotly (1).ipynb
 
 # Oversized raw data (exceeds GitHub's 100MB per-file limit)
 /lecture06_Living_Population/data/SPOP_2025_ADM.csv
+
+# lecture08: 용량이 크거나 배포하지 않는 원자료
+/lecture08_intro_machine_learning/data/24. 용도지역도(국토계획).geojson
+/lecture08_intro_machine_learning/data/구급출동_현황_2020.csv
