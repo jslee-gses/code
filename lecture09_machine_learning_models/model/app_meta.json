@@ -1,0 +1,1391 @@
+{
+  "model": {
+    "file": "emergency_rf.onnx",
+    "input_name": "input",
+    "output_name": "variable",
+    "input_dtype": "float32",
+    "algorithm": "RandomForestRegressor",
+    "params": {
+      "max_depth": 12,
+      "max_features": 0.66,
+      "min_samples_leaf": 10,
+      "n_estimators": 100
+    },
+    "cv_rmse": 10.507,
+    "target": "emergency_no",
+    "target_label": "119 응급출동 건수 (격자당, 2020년)",
+    "n_train": 38094,
+    "sklearn_version": "1.9.0",
+    "created": "2026-11-07"
+  },
+  "features": [
+    {
+      "name": "total_pop",
+      "label": "거주인구",
+      "unit": "명",
+      "type": "continuous",
+      "min": 21,
+      "max": 539,
+      "step": 1,
+      "range_by_region": false
+    },
+    {
+      "name": "elder_ratio",
+      "label": "고령인구 비율 (65세 이상)",
+      "unit": "비율",
+      "type": "continuous",
+      "min": 0.045,
+      "max": 0.3,
+      "step": 0.005,
+      "range_by_region": false
+    },
+    {
+      "name": "youth_ratio",
+      "label": "유소년인구 비율 (0~14세)",
+      "unit": "비율",
+      "type": "continuous",
+      "min": 0.0,
+      "max": 0.25,
+      "step": 0.005,
+      "range_by_region": false
+    },
+    {
+      "name": "industrial_ratio",
+      "label": "공업지역 비율",
+      "unit": "비율",
+      "type": "continuous",
+      "min": 0.0,
+      "max": 1.0,
+      "step": 0.01,
+      "range_by_region": false
+    },
+    {
+      "name": "commercial_ratio",
+      "label": "상업지역 비율",
+      "unit": "비율",
+      "type": "continuous",
+      "min": 0.0,
+      "max": 1.0,
+      "step": 0.01,
+      "range_by_region": false
+    },
+    {
+      "name": "residential_ratio",
+      "label": "주거지역 비율",
+      "unit": "비율",
+      "type": "continuous",
+      "min": 0.0,
+      "max": 1.0,
+      "step": 0.01,
+      "range_by_region": false
+    },
+    {
+      "name": "dist_seoul_city_hall",
+      "label": "서울시청까지 거리",
+      "unit": "m",
+      "type": "continuous",
+      "min": 10,
+      "max": 18180,
+      "step": 10,
+      "range_by_region": true
+    },
+    {
+      "name": "dist_gangnam_station",
+      "label": "강남역까지 거리",
+      "unit": "m",
+      "type": "continuous",
+      "min": 40,
+      "max": 23010,
+      "step": 10,
+      "range_by_region": true
+    }
+  ],
+  "constraints": [
+    {
+      "type": "max_sum",
+      "label": "용도지역 비율의 합",
+      "features": [
+        "industrial_ratio",
+        "commercial_ratio",
+        "residential_ratio"
+      ],
+      "max": 1
+    }
+  ],
+  "regions": [
+    {
+      "name": "서울 전체",
+      "n_cells": 38094,
+      "observed_mean": 10.96,
+      "defaults": {
+        "total_pop": 258,
+        "elder_ratio": 0.16,
+        "youth_ratio": 0.095,
+        "industrial_ratio": 0.0,
+        "commercial_ratio": 0.0,
+        "residential_ratio": 1.0,
+        "dist_seoul_city_hall": 9480,
+        "dist_gangnam_station": 10800
+      },
+      "ranges": {
+        "total_pop": [
+          21,
+          539
+        ],
+        "elder_ratio": [
+          0.045,
+          0.3
+        ],
+        "youth_ratio": [
+          0.0,
+          0.25
+        ],
+        "industrial_ratio": [
+          0.0,
+          1.0
+        ],
+        "commercial_ratio": [
+          0.0,
+          1.0
+        ],
+        "residential_ratio": [
+          0.0,
+          1.0
+        ],
+        "dist_seoul_city_hall": [
+          10,
+          18180
+        ],
+        "dist_gangnam_station": [
+          40,
+          23010
+        ]
+      }
+    },
+    {
+      "name": "강남구",
+      "n_cells": 2703,
+      "observed_mean": 8.82,
+      "defaults": {
+        "total_pop": 173,
+        "elder_ratio": 0.135,
+        "youth_ratio": 0.135,
+        "industrial_ratio": 0.0,
+        "commercial_ratio": 0.0,
+        "residential_ratio": 1.0,
+        "dist_seoul_city_hall": 9890,
+        "dist_gangnam_station": 3100
+      },
+      "ranges": {
+        "total_pop": [
+          85,
+          379
+        ],
+        "elder_ratio": [
+          0.085,
+          0.3
+        ],
+        "youth_ratio": [
+          0.04,
+          0.195
+        ],
+        "industrial_ratio": [
+          0.0,
+          0.0
+        ],
+        "commercial_ratio": [
+          0.0,
+          1.0
+        ],
+        "residential_ratio": [
+          0.0,
+          1.0
+        ],
+        "dist_seoul_city_hall": [
+          5590,
+          16720
+        ],
+        "dist_gangnam_station": [
+          40,
+          8870
+        ]
+      }
+    },
+    {
+      "name": "강동구",
+      "n_cells": 1502,
+      "observed_mean": 10.7,
+      "defaults": {
+        "total_pop": 311,
+        "elder_ratio": 0.145,
+        "youth_ratio": 0.125,
+        "industrial_ratio": 0.0,
+        "commercial_ratio": 0.0,
+        "residential_ratio": 1.0,
+        "dist_seoul_city_hall": 14900,
+        "dist_gangnam_station": 11600
+      },
+      "ranges": {
+        "total_pop": [
+          162,
+          456
+        ],
+        "elder_ratio": [
+          0.105,
+          0.185
+        ],
+        "youth_ratio": [
+          0.065,
+          0.205
+        ],
+        "industrial_ratio": [
+          0.0,
+          1.0
+        ],
+        "commercial_ratio": [
+          0.0,
+          1.0
+        ],
+        "residential_ratio": [
+          0.0,
+          1.0
+        ],
+        "dist_seoul_city_hall": [
+          12720,
+          18180
+        ],
+        "dist_gangnam_station": [
+          8820,
+          15570
+        ]
+      }
+    },
+    {
+      "name": "강북구",
+      "n_cells": 1152,
+      "observed_mean": 14.07,
+      "defaults": {
+        "total_pop": 274,
+        "elder_ratio": 0.22,
+        "youth_ratio": 0.08,
+        "industrial_ratio": 0.0,
+        "commercial_ratio": 0.0,
+        "residential_ratio": 1.0,
+        "dist_seoul_city_hall": 8510,
+        "dist_gangnam_station": 14990
+      },
+      "ranges": {
+        "total_pop": [
+          101,
+          512
+        ],
+        "elder_ratio": [
+          0.125,
+          0.265
+        ],
+        "youth_ratio": [
+          0.05,
+          0.16
+        ],
+        "industrial_ratio": [
+          0.0,
+          0.46
+        ],
+        "commercial_ratio": [
+          0.0,
+          1.0
+        ],
+        "residential_ratio": [
+          0.0,
+          1.0
+        ],
+        "dist_seoul_city_hall": [
+          6220,
+          12230
+        ],
+        "dist_gangnam_station": [
+          12350,
+          19750
+        ]
+      }
+    },
+    {
+      "name": "강서구",
+      "n_cells": 2019,
+      "observed_mean": 12.04,
+      "defaults": {
+        "total_pop": 296,
+        "elder_ratio": 0.145,
+        "youth_ratio": 0.09,
+        "industrial_ratio": 0.0,
+        "commercial_ratio": 0.0,
+        "residential_ratio": 1.0,
+        "dist_seoul_city_hall": 12490,
+        "dist_gangnam_station": 17770
+      },
+      "ranges": {
+        "total_pop": [
+          152,
+          431
+        ],
+        "elder_ratio": [
+          0.095,
+          0.285
+        ],
+        "youth_ratio": [
+          0.045,
+          0.16
+        ],
+        "industrial_ratio": [
+          0.0,
+          1.0
+        ],
+        "commercial_ratio": [
+          0.0,
+          1.0
+        ],
+        "residential_ratio": [
+          0.0,
+          1.0
+        ],
+        "dist_seoul_city_hall": [
+          8890,
+          17720
+        ],
+        "dist_gangnam_station": [
+          14300,
+          23010
+        ]
+      }
+    },
+    {
+      "name": "관악구",
+      "n_cells": 1419,
+      "observed_mean": 15.02,
+      "defaults": {
+        "total_pop": 354,
+        "elder_ratio": 0.15,
+        "youth_ratio": 0.065,
+        "industrial_ratio": 0.0,
+        "commercial_ratio": 0.0,
+        "residential_ratio": 1.0,
+        "dist_seoul_city_hall": 10500,
+        "dist_gangnam_station": 8480
+      },
+      "ranges": {
+        "total_pop": [
+          235,
+          539
+        ],
+        "elder_ratio": [
+          0.08,
+          0.235
+        ],
+        "youth_ratio": [
+          0.02,
+          0.125
+        ],
+        "industrial_ratio": [
+          0.0,
+          0.25
+        ],
+        "commercial_ratio": [
+          0.0,
+          1.0
+        ],
+        "residential_ratio": [
+          0.0,
+          1.0
+        ],
+        "dist_seoul_city_hall": [
+          8260,
+          13200
+        ],
+        "dist_gangnam_station": [
+          4770,
+          11470
+        ]
+      }
+    },
+    {
+      "name": "광진구",
+      "n_cells": 1158,
+      "observed_mean": 11.71,
+      "defaults": {
+        "total_pop": 282,
+        "elder_ratio": 0.145,
+        "youth_ratio": 0.075,
+        "industrial_ratio": 0.0,
+        "commercial_ratio": 0.0,
+        "residential_ratio": 1.0,
+        "dist_seoul_city_hall": 9680,
+        "dist_gangnam_station": 7610
+      },
+      "ranges": {
+        "total_pop": [
+          164,
+          421
+        ],
+        "elder_ratio": [
+          0.09,
+          0.2
+        ],
+        "youth_ratio": [
+          0.025,
+          0.185
+        ],
+        "industrial_ratio": [
+          0.0,
+          0.44
+        ],
+        "commercial_ratio": [
+          0.0,
+          0.85
+        ],
+        "residential_ratio": [
+          0.0,
+          1.0
+        ],
+        "dist_seoul_city_hall": [
+          8010,
+          11970
+        ],
+        "dist_gangnam_station": [
+          4880,
+          10100
+        ]
+      }
+    },
+    {
+      "name": "구로구",
+      "n_cells": 1556,
+      "observed_mean": 11.12,
+      "defaults": {
+        "total_pop": 264,
+        "elder_ratio": 0.18,
+        "youth_ratio": 0.105,
+        "industrial_ratio": 0.0,
+        "commercial_ratio": 0.0,
+        "residential_ratio": 0.88,
+        "dist_seoul_city_hall": 13120,
+        "dist_gangnam_station": 15100
+      },
+      "ranges": {
+        "total_pop": [
+          156,
+          441
+        ],
+        "elder_ratio": [
+          0.09,
+          0.225
+        ],
+        "youth_ratio": [
+          0.035,
+          0.215
+        ],
+        "industrial_ratio": [
+          0.0,
+          1.0
+        ],
+        "commercial_ratio": [
+          0.0,
+          1.0
+        ],
+        "residential_ratio": [
+          0.0,
+          1.0
+        ],
+        "dist_seoul_city_hall": [
+          9960,
+          17440
+        ],
+        "dist_gangnam_station": [
+          11190,
+          18800
+        ]
+      }
+    },
+    {
+      "name": "금천구",
+      "n_cells": 888,
+      "observed_mean": 12.47,
+      "defaults": {
+        "total_pop": 243,
+        "elder_ratio": 0.18,
+        "youth_ratio": 0.08,
+        "industrial_ratio": 0.0,
+        "commercial_ratio": 0.0,
+        "residential_ratio": 0.87,
+        "dist_seoul_city_hall": 13570,
+        "dist_gangnam_station": 12140
+      },
+      "ranges": {
+        "total_pop": [
+          138,
+          387
+        ],
+        "elder_ratio": [
+          0.11,
+          0.225
+        ],
+        "youth_ratio": [
+          0.03,
+          0.12
+        ],
+        "industrial_ratio": [
+          0.0,
+          1.0
+        ],
+        "commercial_ratio": [
+          0.0,
+          0.8
+        ],
+        "residential_ratio": [
+          0.0,
+          1.0
+        ],
+        "dist_seoul_city_hall": [
+          11410,
+          16060
+        ],
+        "dist_gangnam_station": [
+          10540,
+          13680
+        ]
+      }
+    },
+    {
+      "name": "노원구",
+      "n_cells": 1739,
+      "observed_mean": 11.93,
+      "defaults": {
+        "total_pop": 267,
+        "elder_ratio": 0.165,
+        "youth_ratio": 0.105,
+        "industrial_ratio": 0.0,
+        "commercial_ratio": 0.0,
+        "residential_ratio": 1.0,
+        "dist_seoul_city_hall": 11990,
+        "dist_gangnam_station": 16810
+      },
+      "ranges": {
+        "total_pop": [
+          191,
+          461
+        ],
+        "elder_ratio": [
+          0.08,
+          0.22
+        ],
+        "youth_ratio": [
+          0.075,
+          0.18
+        ],
+        "industrial_ratio": [
+          0.0,
+          0.0
+        ],
+        "commercial_ratio": [
+          0.0,
+          1.0
+        ],
+        "residential_ratio": [
+          0.0,
+          1.0
+        ],
+        "dist_seoul_city_hall": [
+          8940,
+          15900
+        ],
+        "dist_gangnam_station": [
+          13310,
+          21440
+        ]
+      }
+    },
+    {
+      "name": "도봉구",
+      "n_cells": 1160,
+      "observed_mean": 11.7,
+      "defaults": {
+        "total_pop": 273,
+        "elder_ratio": 0.195,
+        "youth_ratio": 0.09,
+        "industrial_ratio": 0.0,
+        "commercial_ratio": 0.0,
+        "residential_ratio": 0.98,
+        "dist_seoul_city_hall": 11420,
+        "dist_gangnam_station": 17860
+      },
+      "ranges": {
+        "total_pop": [
+          101,
+          463
+        ],
+        "elder_ratio": [
+          0.15,
+          0.265
+        ],
+        "youth_ratio": [
+          0.055,
+          0.12
+        ],
+        "industrial_ratio": [
+          0.0,
+          1.0
+        ],
+        "commercial_ratio": [
+          0.0,
+          1.0
+        ],
+        "residential_ratio": [
+          0.0,
+          1.0
+        ],
+        "dist_seoul_city_hall": [
+          9050,
+          15320
+        ],
+        "dist_gangnam_station": [
+          14800,
+          21900
+        ]
+      }
+    },
+    {
+      "name": "동대문구",
+      "n_cells": 1281,
+      "observed_mean": 13.65,
+      "defaults": {
+        "total_pop": 267,
+        "elder_ratio": 0.175,
+        "youth_ratio": 0.09,
+        "industrial_ratio": 0.0,
+        "commercial_ratio": 0.0,
+        "residential_ratio": 1.0,
+        "dist_seoul_city_hall": 7120,
+        "dist_gangnam_station": 9440
+      },
+      "ranges": {
+        "total_pop": [
+          161,
+          364
+        ],
+        "elder_ratio": [
+          0.13,
+          0.27
+        ],
+        "youth_ratio": [
+          0.06,
+          0.135
+        ],
+        "industrial_ratio": [
+          0.0,
+          0.0
+        ],
+        "commercial_ratio": [
+          0.0,
+          1.0
+        ],
+        "residential_ratio": [
+          0.0,
+          1.0
+        ],
+        "dist_seoul_city_hall": [
+          4050,
+          9230
+        ],
+        "dist_gangnam_station": [
+          7670,
+          12540
+        ]
+      }
+    },
+    {
+      "name": "동작구",
+      "n_cells": 1319,
+      "observed_mean": 11.11,
+      "defaults": {
+        "total_pop": 283,
+        "elder_ratio": 0.17,
+        "youth_ratio": 0.095,
+        "industrial_ratio": 0.0,
+        "commercial_ratio": 0.0,
+        "residential_ratio": 1.0,
+        "dist_seoul_city_hall": 8100,
+        "dist_gangnam_station": 7000
+      },
+      "ranges": {
+        "total_pop": [
+          198,
+          539
+        ],
+        "elder_ratio": [
+          0.14,
+          0.205
+        ],
+        "youth_ratio": [
+          0.04,
+          0.12
+        ],
+        "industrial_ratio": [
+          0.0,
+          0.0
+        ],
+        "commercial_ratio": [
+          0.0,
+          1.0
+        ],
+        "residential_ratio": [
+          0.0,
+          1.0
+        ],
+        "dist_seoul_city_hall": [
+          6160,
+          11150
+        ],
+        "dist_gangnam_station": [
+          3790,
+          10990
+        ]
+      }
+    },
+    {
+      "name": "마포구",
+      "n_cells": 1448,
+      "observed_mean": 12.21,
+      "defaults": {
+        "total_pop": 239,
+        "elder_ratio": 0.135,
+        "youth_ratio": 0.105,
+        "industrial_ratio": 0.0,
+        "commercial_ratio": 0.0,
+        "residential_ratio": 1.0,
+        "dist_seoul_city_hall": 5390,
+        "dist_gangnam_station": 11430
+      },
+      "ranges": {
+        "total_pop": [
+          142,
+          370
+        ],
+        "elder_ratio": [
+          0.11,
+          0.165
+        ],
+        "youth_ratio": [
+          0.04,
+          0.195
+        ],
+        "industrial_ratio": [
+          0.0,
+          0.0
+        ],
+        "commercial_ratio": [
+          0.0,
+          1.0
+        ],
+        "residential_ratio": [
+          0.0,
+          1.0
+        ],
+        "dist_seoul_city_hall": [
+          1700,
+          9160
+        ],
+        "dist_gangnam_station": [
+          7880,
+          16470
+        ]
+      }
+    },
+    {
+      "name": "서대문구",
+      "n_cells": 1349,
+      "observed_mean": 10.1,
+      "defaults": {
+        "total_pop": 199,
+        "elder_ratio": 0.16,
+        "youth_ratio": 0.085,
+        "industrial_ratio": 0.0,
+        "commercial_ratio": 0.0,
+        "residential_ratio": 1.0,
+        "dist_seoul_city_hall": 4190,
+        "dist_gangnam_station": 12260
+      },
+      "ranges": {
+        "total_pop": [
+          129,
+          385
+        ],
+        "elder_ratio": [
+          0.1,
+          0.23
+        ],
+        "youth_ratio": [
+          0.05,
+          0.195
+        ],
+        "industrial_ratio": [
+          0.0,
+          0.0
+        ],
+        "commercial_ratio": [
+          0.0,
+          1.0
+        ],
+        "residential_ratio": [
+          0.0,
+          1.0
+        ],
+        "dist_seoul_city_hall": [
+          960,
+          6800
+        ],
+        "dist_gangnam_station": [
+          8830,
+          14120
+        ]
+      }
+    },
+    {
+      "name": "서초구",
+      "n_cells": 2402,
+      "observed_mean": 6.61,
+      "defaults": {
+        "total_pop": 144,
+        "elder_ratio": 0.145,
+        "youth_ratio": 0.135,
+        "industrial_ratio": 0.0,
+        "commercial_ratio": 0.0,
+        "residential_ratio": 1.0,
+        "dist_seoul_city_hall": 9630,
+        "dist_gangnam_station": 2920
+      },
+      "ranges": {
+        "total_pop": [
+          59,
+          349
+        ],
+        "elder_ratio": [
+          0.11,
+          0.195
+        ],
+        "youth_ratio": [
+          0.09,
+          0.22
+        ],
+        "industrial_ratio": [
+          0.0,
+          0.0
+        ],
+        "commercial_ratio": [
+          0.0,
+          1.0
+        ],
+        "residential_ratio": [
+          0.0,
+          1.0
+        ],
+        "dist_seoul_city_hall": [
+          5850,
+          17140
+        ],
+        "dist_gangnam_station": [
+          50,
+          8370
+        ]
+      }
+    },
+    {
+      "name": "성동구",
+      "n_cells": 1149,
+      "observed_mean": 10.36,
+      "defaults": {
+        "total_pop": 228,
+        "elder_ratio": 0.16,
+        "youth_ratio": 0.09,
+        "industrial_ratio": 0.0,
+        "commercial_ratio": 0.0,
+        "residential_ratio": 1.0,
+        "dist_seoul_city_hall": 5640,
+        "dist_gangnam_station": 6260
+      },
+      "ranges": {
+        "total_pop": [
+          95,
+          474
+        ],
+        "elder_ratio": [
+          0.115,
+          0.22
+        ],
+        "youth_ratio": [
+          0.05,
+          0.135
+        ],
+        "industrial_ratio": [
+          0.0,
+          1.0
+        ],
+        "commercial_ratio": [
+          0.0,
+          1.0
+        ],
+        "residential_ratio": [
+          0.0,
+          1.0
+        ],
+        "dist_seoul_city_hall": [
+          3490,
+          8380
+        ],
+        "dist_gangnam_station": [
+          4570,
+          8370
+        ]
+      }
+    },
+    {
+      "name": "성북구",
+      "n_cells": 1756,
+      "observed_mean": 9.82,
+      "defaults": {
+        "total_pop": 259,
+        "elder_ratio": 0.165,
+        "youth_ratio": 0.09,
+        "industrial_ratio": 0.0,
+        "commercial_ratio": 0.0,
+        "residential_ratio": 1.0,
+        "dist_seoul_city_hall": 5650,
+        "dist_gangnam_station": 11830
+      },
+      "ranges": {
+        "total_pop": [
+          78,
+          467
+        ],
+        "elder_ratio": [
+          0.12,
+          0.27
+        ],
+        "youth_ratio": [
+          0.05,
+          0.185
+        ],
+        "industrial_ratio": [
+          0.0,
+          0.0
+        ],
+        "commercial_ratio": [
+          0.0,
+          1.0
+        ],
+        "residential_ratio": [
+          0.0,
+          1.0
+        ],
+        "dist_seoul_city_hall": [
+          2950,
+          9650
+        ],
+        "dist_gangnam_station": [
+          8880,
+          14100
+        ]
+      }
+    },
+    {
+      "name": "송파구",
+      "n_cells": 2345,
+      "observed_mean": 9.24,
+      "defaults": {
+        "total_pop": 269,
+        "elder_ratio": 0.14,
+        "youth_ratio": 0.11,
+        "industrial_ratio": 0.0,
+        "commercial_ratio": 0.0,
+        "residential_ratio": 1.0,
+        "dist_seoul_city_hall": 14330,
+        "dist_gangnam_station": 8460
+      },
+      "ranges": {
+        "total_pop": [
+          95,
+          479
+        ],
+        "elder_ratio": [
+          0.07,
+          0.215
+        ],
+        "youth_ratio": [
+          0.06,
+          0.25
+        ],
+        "industrial_ratio": [
+          0.0,
+          0.0
+        ],
+        "commercial_ratio": [
+          0.0,
+          1.0
+        ],
+        "residential_ratio": [
+          0.0,
+          1.0
+        ],
+        "dist_seoul_city_hall": [
+          10400,
+          18000
+        ],
+        "dist_gangnam_station": [
+          3990,
+          11810
+        ]
+      }
+    },
+    {
+      "name": "양천구",
+      "n_cells": 1454,
+      "observed_mean": 10.47,
+      "defaults": {
+        "total_pop": 320,
+        "elder_ratio": 0.15,
+        "youth_ratio": 0.13,
+        "industrial_ratio": 0.0,
+        "commercial_ratio": 0.0,
+        "residential_ratio": 1.0,
+        "dist_seoul_city_hall": 11820,
+        "dist_gangnam_station": 15190
+      },
+      "ranges": {
+        "total_pop": [
+          217,
+          455
+        ],
+        "elder_ratio": [
+          0.095,
+          0.22
+        ],
+        "youth_ratio": [
+          0.07,
+          0.185
+        ],
+        "industrial_ratio": [
+          0.0,
+          1.0
+        ],
+        "commercial_ratio": [
+          0.0,
+          1.0
+        ],
+        "residential_ratio": [
+          0.0,
+          1.0
+        ],
+        "dist_seoul_city_hall": [
+          8670,
+          14770
+        ],
+        "dist_gangnam_station": [
+          13000,
+          18740
+        ]
+      }
+    },
+    {
+      "name": "영등포구",
+      "n_cells": 1591,
+      "observed_mean": 12.58,
+      "defaults": {
+        "total_pop": 246,
+        "elder_ratio": 0.175,
+        "youth_ratio": 0.1,
+        "industrial_ratio": 0.0,
+        "commercial_ratio": 0.0,
+        "residential_ratio": 0.41,
+        "dist_seoul_city_hall": 8610,
+        "dist_gangnam_station": 11040
+      },
+      "ranges": {
+        "total_pop": [
+          114,
+          385
+        ],
+        "elder_ratio": [
+          0.105,
+          0.225
+        ],
+        "youth_ratio": [
+          0.05,
+          0.155
+        ],
+        "industrial_ratio": [
+          0.0,
+          1.0
+        ],
+        "commercial_ratio": [
+          0.0,
+          1.0
+        ],
+        "residential_ratio": [
+          0.0,
+          1.0
+        ],
+        "dist_seoul_city_hall": [
+          4730,
+          11300
+        ],
+        "dist_gangnam_station": [
+          8040,
+          14470
+        ]
+      }
+    },
+    {
+      "name": "용산구",
+      "n_cells": 1271,
+      "observed_mean": 9.13,
+      "defaults": {
+        "total_pop": 131,
+        "elder_ratio": 0.17,
+        "youth_ratio": 0.08,
+        "industrial_ratio": 0.0,
+        "commercial_ratio": 0.0,
+        "residential_ratio": 1.0,
+        "dist_seoul_city_hall": 3910,
+        "dist_gangnam_station": 6110
+      },
+      "ranges": {
+        "total_pop": [
+          84,
+          418
+        ],
+        "elder_ratio": [
+          0.115,
+          0.205
+        ],
+        "youth_ratio": [
+          0.05,
+          0.155
+        ],
+        "industrial_ratio": [
+          0.0,
+          0.0
+        ],
+        "commercial_ratio": [
+          0.0,
+          1.0
+        ],
+        "residential_ratio": [
+          0.0,
+          1.0
+        ],
+        "dist_seoul_city_hall": [
+          1390,
+          5850
+        ],
+        "dist_gangnam_station": [
+          3630,
+          8350
+        ]
+      }
+    },
+    {
+      "name": "은평구",
+      "n_cells": 1793,
+      "observed_mean": 10.6,
+      "defaults": {
+        "total_pop": 280,
+        "elder_ratio": 0.175,
+        "youth_ratio": 0.095,
+        "industrial_ratio": 0.0,
+        "commercial_ratio": 0.0,
+        "residential_ratio": 1.0,
+        "dist_seoul_city_hall": 7380,
+        "dist_gangnam_station": 15800
+      },
+      "ranges": {
+        "total_pop": [
+          116,
+          429
+        ],
+        "elder_ratio": [
+          0.125,
+          0.22
+        ],
+        "youth_ratio": [
+          0.06,
+          0.165
+        ],
+        "industrial_ratio": [
+          0.0,
+          0.0
+        ],
+        "commercial_ratio": [
+          0.0,
+          1.0
+        ],
+        "residential_ratio": [
+          0.0,
+          1.0
+        ],
+        "dist_seoul_city_hall": [
+          4940,
+          11070
+        ],
+        "dist_gangnam_station": [
+          13390,
+          19820
+        ]
+      }
+    },
+    {
+      "name": "종로구",
+      "n_cells": 1484,
+      "observed_mean": 8.32,
+      "defaults": {
+        "total_pop": 68,
+        "elder_ratio": 0.185,
+        "youth_ratio": 0.1,
+        "industrial_ratio": 0.0,
+        "commercial_ratio": 0.0,
+        "residential_ratio": 0.96,
+        "dist_seoul_city_hall": 2710,
+        "dist_gangnam_station": 10330
+      },
+      "ranges": {
+        "total_pop": [
+          32,
+          296
+        ],
+        "elder_ratio": [
+          0.15,
+          0.285
+        ],
+        "youth_ratio": [
+          0.0,
+          0.145
+        ],
+        "industrial_ratio": [
+          0.0,
+          0.0
+        ],
+        "commercial_ratio": [
+          0.0,
+          1.0
+        ],
+        "residential_ratio": [
+          0.0,
+          1.0
+        ],
+        "dist_seoul_city_hall": [
+          300,
+          6370
+        ],
+        "dist_gangnam_station": [
+          8090,
+          15120
+        ]
+      }
+    },
+    {
+      "name": "중구",
+      "n_cells": 879,
+      "observed_mean": 13.62,
+      "defaults": {
+        "total_pop": 66,
+        "elder_ratio": 0.19,
+        "youth_ratio": 0.075,
+        "industrial_ratio": 0.0,
+        "commercial_ratio": 0.06,
+        "residential_ratio": 0.94,
+        "dist_seoul_city_hall": 1970,
+        "dist_gangnam_station": 7720
+      },
+      "ranges": {
+        "total_pop": [
+          21,
+          397
+        ],
+        "elder_ratio": [
+          0.045,
+          0.27
+        ],
+        "youth_ratio": [
+          0.0,
+          0.12
+        ],
+        "industrial_ratio": [
+          0.0,
+          0.0
+        ],
+        "commercial_ratio": [
+          0.0,
+          1.0
+        ],
+        "residential_ratio": [
+          0.0,
+          1.0
+        ],
+        "dist_seoul_city_hall": [
+          10,
+          4240
+        ],
+        "dist_gangnam_station": [
+          5510,
+          9310
+        ]
+      }
+    },
+    {
+      "name": "중랑구",
+      "n_cells": 1277,
+      "observed_mean": 14.99,
+      "defaults": {
+        "total_pop": 324,
+        "elder_ratio": 0.18,
+        "youth_ratio": 0.085,
+        "industrial_ratio": 0.0,
+        "commercial_ratio": 0.0,
+        "residential_ratio": 1.0,
+        "dist_seoul_city_hall": 10360,
+        "dist_gangnam_station": 12480
+      },
+      "ranges": {
+        "total_pop": [
+          187,
+          391
+        ],
+        "elder_ratio": [
+          0.145,
+          0.195
+        ],
+        "youth_ratio": [
+          0.05,
+          0.14
+        ],
+        "industrial_ratio": [
+          0.0,
+          0.0
+        ],
+        "commercial_ratio": [
+          0.0,
+          1.0
+        ],
+        "residential_ratio": [
+          0.0,
+          1.0
+        ],
+        "dist_seoul_city_hall": [
+          8640,
+          13170
+        ],
+        "dist_gangnam_station": [
+          9440,
+          15260
+        ]
+      }
+    }
+  ]
+}
